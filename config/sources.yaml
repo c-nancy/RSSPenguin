@@ -1,0 +1,159 @@
+keywords:
+  # Common names
+  - penguin
+  - penguins
+  - penguin colony
+  - penguin chick
+  - penguin breeding
+  - penguin population
+  - penguin conservation
+  - penguin habitat
+  - penguin migration
+  # Species — Aptenodytes
+  - emperor penguin
+  - Aptenodytes forsteri
+  - king penguin
+  - Aptenodytes patagonicus
+  # Species — Pygoscelis
+  - adelie penguin
+  - Pygoscelis adeliae
+  - chinstrap penguin
+  - Pygoscelis antarcticus
+  - gentoo penguin
+  - Pygoscelis papua
+  # Species — Eudyptula
+  - little penguin
+  - little blue penguin
+  - fairy penguin
+  - blue penguin
+  - Eudyptula minor
+  - white-flippered penguin
+  - Eudyptula albosignata
+  # Species — Spheniscus
+  - african penguin
+  - jackass penguin
+  - black-footed penguin
+  - Spheniscus demersus
+  - magellanic penguin
+  - Spheniscus magellanicus
+  - humboldt penguin
+  - Spheniscus humboldti
+  - galapagos penguin
+  - Spheniscus mendiculus
+  # Species — Megadyptes
+  - yellow-eyed penguin
+  - hoiho
+  - Megadyptes antipodes
+  # Species — Eudyptes (crested)
+  - fiordland penguin
+  - tawaki
+  - Eudyptes pachyrhynchus
+  - snares penguin
+  - Eudyptes robustus
+  - erect-crested penguin
+  - Eudyptes sclateri
+  - rockhopper penguin
+  - southern rockhopper
+  - Eudyptes chrysocome
+  - eastern rockhopper
+  - Eudyptes filholi
+  - northern rockhopper
+  - moseley's penguin
+  - Eudyptes moseleyi
+  - macaroni penguin
+  - Eudyptes chrysolophus
+  - royal penguin
+  - Eudyptes schlegeli
+  # Family / taxonomy
+  - Spheniscidae
+  - Sphenisciformes
+  # Habitat keywords
+  - Antarctica
+  - Antarctic wildlife
+  - sub-Antarctic
+  - Southern Ocean
+  - Falkland Islands penguins
+  - Galapagos wildlife
+
+feeds:
+  # --- News & Science Media ---
+  - name: BBC Science & Environment
+    url: https://feeds.bbci.co.uk/news/science_and_environment/rss.xml
+    type: news
+
+  - name: NYT Science
+    url: https://rss.nytimes.com/services/xml/rss/nyt/Science.xml
+    type: news
+
+  - name: The Guardian Environment
+    url: https://www.theguardian.com/environment/rss
+    type: news
+
+  - name: Phys.org Biology
+    url: https://phys.org/rss-feed/biology-news/animals-and-plants/
+    type: news
+
+  - name: ScienceDaily Birds
+    url: https://www.sciencedaily.com/rss/plants_animals/birds.xml
+    type: news
+
+  - name: ScienceDaily Marine Biology
+    url: https://www.sciencedaily.com/rss/earth_climate/marine_biology.xml
+    type: news
+
+  - name: Antarctic Sun
+    url: https://antarcticsun.usap.gov/feed/
+    type: news
+
+  - name: National Geographic Animals
+    url: https://feeds.nationalgeographic.com/ng/News/News_Main
+    type: news
+
+  - name: New Scientist Environment
+    url: https://www.newscientist.com/subject/environment/feed/
+    type: news
+
+  - name: Reuters Science
+    url: https://feeds.reuters.com/reuters/scienceNews
+    type: news
+
+  - name: AP Science
+    url: https://rsshub.app/apnews/topics/science
+    type: news
+
+  # --- Academic & Research ---
+  - name: British Antarctic Survey
+    url: https://www.bas.ac.uk/category/science/feed/
+    type: academic
+
+  - name: BAS Publications
+    url: https://www.bas.ac.uk/data/our-data/publication/feed/
+    type: academic
+
+  - name: arXiv — Populations & Evolution
+    url: https://rss.arxiv.org/rss/q-bio.PE
+    type: academic
+
+  - name: bioRxiv — Ecology
+    url: https://connect.biorxiv.org/biorxiv_xml.php?subject=ecology
+    type: academic
+
+  - name: bioRxiv — Evolutionary Biology
+    url: https://connect.biorxiv.org/biorxiv_xml.php?subject=evolutionary_biology
+    type: academic
+
+  - name: bioRxiv — Zoology
+    url: https://connect.biorxiv.org/biorxiv_xml.php?subject=zoology
+    type: academic
+
+  - name: PLOS ONE
+    url: https://plos.org/journal/plos-one/feed/
+    type: academic
+
+  - name: Polar Biology (Springer)
+    url: https://link.springer.com/search.rss?query=&search-within=Journal&facet-journal-id=300
+    type: academic
+
+  - name: Antarctic Science (Cambridge)
+    url: https://www.cambridge.org/core/journals/antarctic-science/rss
+    type: academic
