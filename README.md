@@ -53,25 +53,20 @@ python main.py
 - Add/remove keywords: edit the `keywords` list in `config/sources.yaml`
 - Change schedule: edit the cron expression in `.github/workflows/daily-report.yml`
 
-### Supported Penguin Species
-The system tracks news and research for all major penguin species including:
-- Emperor penguin (Aptenodytes forsteri)
-- King penguin (Aptenodytes patagonicus) 
-- Adélie penguin (Pygoscelis adeliae)
-- Chinstrap penguin (Pygoscelis antarcticus)
-- Gentoo penguin (Pygoscelis papua)
-- Little penguin / Little blue penguin (Eudyptula minor)
-- African penguin (Spheniscus demersus)
-- Magellanic penguin (Spheniscus magellanicus)
-- Humboldt penguin (Spheniscus humboldti)
-- Galapagos penguin (Spheniscus mendiculus)
-- Yellow-eyed penguin (Megadyptes antipodes)
-- Rockhopper penguins (Eudyptes chrysocome, E. filholi)
-- **Moseley's penguin (Eudyptes moseleyi)**
-- Macaroni penguin (Eudyptes chrysolophus)
-- Royal penguin (Eudyptes schlegeli)
+### Some Supported Information Sources
+The system tracks penguin-related content from various information sources including:
+- Scientific research journals and publications
+- Wildlife conservation organization blogs and news
+- Zoological institution updates and press releases
+- Environmental news websites and RSS feeds
+- Academic institution research announcements
+- Wildlife photography and nature blogs
+- Penguin conservation project updates
+- Marine biology research feeds
+- Climate change and environmental science news
+- Antarctic and sub-Antarctic research station reports
 
-And many more species-specific and conservation-related keywords.
+Content is filtered using comprehensive penguin-related keywords covering all major species, conservation terms, and research topics.
 
 ## Reports
 
