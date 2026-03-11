@@ -10,6 +10,7 @@ Daily penguin news aggregator. Pulls from free RSS feeds, filters for penguin-re
 4. A Markdown report is saved to `reports/YYYY-MM-DD.md` and committed
 5. The report is emailed to you via Brevo
 
+
 ## Setup
 
 ### 1. Fork / clone this repo to your GitHub account
@@ -33,6 +34,7 @@ Go to the Actions tab and enable workflows if prompted.
 
 ### 5. Test manually
 Go to Actions → Daily Penguin News Report → Run workflow
+
 
 ## Local development
 
@@ -77,3 +79,17 @@ Daily reports are stored in `reports/YYYY-MM-DD.md`.
 Here's an example of what the daily email report looks like:
 
 ![Email Report Example](demo.png)
+
+## Subscribe to Daily Reports
+
+Want to receive daily penguin news reports directly in your inbox? 
+
+🐧 [Register your email here](https://www.kdocs.cn/l/cfPogvdbLDZL)
+
+I'll add you to my mailing list and send the curated penguin news report to you daily!
+
+## Suggesting New Sources
+
+Have a great source of penguin news that I haven't included yet? 
+
+I'd love to hear about it! Please [submit a suggestion](https://www.kdocs.cn/l/cgZfqRwNJPkR) and I'll add it to the list.
