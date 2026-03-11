@@ -26,33 +26,60 @@ def markdown_to_html(md: str) -> str:
     return html
 
 
+def _get_list_emails(api_key: str, list_id: int) -> list[str]:
+    """Fetch all contact emails from a Brevo contact list."""
+    configuration = sib_api_v3_sdk.Configuration()
+    configuration.api_key["api-key"] = api_key
+    contacts_api = sib_api_v3_sdk.ContactsApi(sib_api_v3_sdk.ApiClient(configuration))
+
+    emails = []
+    limit = 50
+    offset = 0
+    while True:
+        result = contacts_api.get_contacts_from_list(list_id, limit=limit, offset=offset)
+        batch = result.contacts or []
+        emails.extend(c["email"] for c in batch if c.get("email"))
+        if len(batch) < limit:
+            break
+        offset += limit
+    return emails
+
+
 def send_report(subject: str, markdown_content: str) -> bool:
     api_key = os.environ.get("BREVO_API_KEY")
-    to_email = os.environ.get("TO_EMAIL")
+    list_id = os.environ.get("BREVO_LIST_ID")
     from_email = os.environ.get("FROM_EMAIL")
 
-    if not all([api_key, to_email, from_email]):
+    if not all([api_key, list_id, from_email]):
         logger.warning("Brevo env vars not set — skipping email.")
+        return False
+
+    recipients = _get_list_emails(api_key, int(list_id))
+    if not recipients:
+        logger.warning("No contacts found in Brevo list — skipping email.")
         return False
 
     configuration = sib_api_v3_sdk.Configuration()
     configuration.api_key["api-key"] = api_key
-
     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
         sib_api_v3_sdk.ApiClient(configuration)
     )
 
-    email = sib_api_v3_sdk.SendSmtpEmail(
-        sender={"email": from_email},
-        to=[{"email": to_email}],
-        subject=subject,
-        html_content=markdown_to_html(markdown_content),
-    )
+    html = markdown_to_html(markdown_content)
+    success_count = 0
+    for recipient_email in recipients:
+        email = sib_api_v3_sdk.SendSmtpEmail(
+            sender={"email": from_email},
+            to=[{"email": recipient_email}],
+            subject=subject,
+            html_content=html,
+        )
+        try:
+            response = api_instance.send_transac_email(email)
+            logger.info(f"Sent to {recipient_email}. Message ID: {response.message_id}")
+            success_count += 1
+        except ApiException as e:
+            logger.error(f"Failed to send to {recipient_email}: {e}")
 
-    try:
-        response = api_instance.send_transac_email(email)
-        logger.info(f"Email sent. Message ID: {response.message_id}")
-        return True
-    except ApiException as e:
-        logger.error(f"Failed to send email via Brevo: {e}")
-        return False
+    logger.info(f"Report sent to {success_count}/{len(recipients)} recipients.")
+    return success_count > 0
