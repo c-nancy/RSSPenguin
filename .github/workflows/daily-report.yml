@@ -27,7 +27,7 @@ jobs:
       - name: Run RSSPenguin
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
           FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
         run: python main.py
 
