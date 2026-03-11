@@ -71,3 +71,9 @@ Content is filtered using comprehensive penguin-related keywords covering all ma
 ## Reports
 
 Daily reports are stored in `reports/YYYY-MM-DD.md`.
+
+### Email Output Example
+
+Here's an example of what the daily email report looks like:
+
+![Email Report Example](demo.png)
