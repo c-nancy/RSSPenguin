@@ -4,7 +4,7 @@ Weekly penguin news aggregator. Pulls from free RSS feeds, filters for penguin-r
 
 ## How it works
 
-1. GitHub Actions triggers weekly at 08:00 UTC
+1. GitHub Actions triggers weekly at 08:00 UTC each Monday
 2. `main.py` fetches articles from RSS feeds in `config/sources.yaml`
 3. Articles are filtered by penguin-related keywords
 4. A Markdown report is saved to `reports/YYYY-MM-DD.md` and committed
