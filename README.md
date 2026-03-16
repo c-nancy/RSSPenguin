@@ -80,9 +80,9 @@ Here's an example of what the weekly email report looks like:
 
 ![Email Report Example](demo.png)
 
-## Subscribe to Weekly Reports
+## Subscribe to my Weekly Reports
 
-Want to receive weekly penguin news reports directly in your inbox? 
+Want to receive my weekly penguin news reports directly in your inbox? 
 
 🐧 [Register your email here](https://www.kdocs.cn/l/cfPogvdbLDZL)
 
