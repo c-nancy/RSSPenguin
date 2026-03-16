@@ -1,10 +1,10 @@
 # RSSPenguin
 
-Daily penguin news aggregator. Pulls from free RSS feeds, filters for penguin-related content, commits a Markdown report to this repo, and emails it via Brevo.
+Weekly penguin news aggregator. Pulls from free RSS feeds, filters for penguin-related content, commits a Markdown report to this repo, and emails it via Brevo.
 
 ## How it works
 
-1. GitHub Actions triggers daily at 08:00 UTC
+1. GitHub Actions triggers weekly at 08:00 UTC
 2. `main.py` fetches articles from RSS feeds in `config/sources.yaml`
 3. Articles are filtered by penguin-related keywords
 4. A Markdown report is saved to `reports/YYYY-MM-DD.md` and committed
@@ -33,7 +33,7 @@ Go to your repo → Settings → Secrets and variables → Actions → New repos
 Go to the Actions tab and enable workflows if prompted.
 
 ### 5. Test manually
-Go to Actions → Daily Penguin News Report → Run workflow
+Go to Actions → Weekly Penguin News Report → Run workflow
 
 
 ## Local development
@@ -72,21 +72,21 @@ Content is filtered using comprehensive penguin-related keywords covering all ma
 
 ## Reports
 
-Daily reports are stored in `reports/YYYY-MM-DD.md`.
+Weekly reports are stored in `reports/YYYY-MM-DD.md`.
 
 ### Email Output Example
 
-Here's an example of what the daily email report looks like:
+Here's an example of what the weekly email report looks like:
 
 ![Email Report Example](demo.png)
 
-## Subscribe to Daily Reports
+## Subscribe to Weekly Reports
 
-Want to receive daily penguin news reports directly in your inbox? 
+Want to receive weekly penguin news reports directly in your inbox? 
 
 🐧 [Register your email here](https://www.kdocs.cn/l/cfPogvdbLDZL)
 
-I'll add you to my mailing list and send the curated penguin news report to you daily!
+I'll add you to my mailing list and send the curated penguin news report to you weekly!
 
 ## Suggesting New Sources
 

@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
 from src.collector import collect_all
@@ -20,7 +20,8 @@ logger = logging.getLogger(__name__)
 
 def main():
     today = datetime.now(timezone.utc)
-    logger.info(f"Starting RSSPenguin for {today.strftime('%Y-%m-%d')}")
+    week_start = today - timedelta(days=7)
+    logger.info(f"Starting RSSPenguin weekly report for week of {week_start.strftime('%Y-%m-%d')}")
 
     articles = collect_all()
     logger.info(f"Total articles fetched: {len(articles)}")
@@ -28,11 +29,11 @@ def main():
     filtered = filter_articles(articles)
     logger.info(f"Articles after filtering: {len(filtered)}")
 
-    report = format_report(filtered, date=today)
+    report = format_report(filtered, date=today, week_start=week_start)
     path = save_report(report, date=today)
     logger.info(f"Report saved to {path}")
 
-    subject = f"Penguin News — {today.strftime('%Y-%m-%d')}"
+    subject = f"Penguin News — Week of {week_start.strftime('%Y-%m-%d')}"
     send_report(subject, report)
 
 

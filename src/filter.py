@@ -1,5 +1,6 @@
 import re
 import yaml
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "sources.yaml"
@@ -33,5 +34,7 @@ def deduplicate(articles: list[dict]) -> list[dict]:
 
 def filter_articles(articles: list[dict]) -> list[dict]:
     keywords = load_keywords()
-    matched = [a for a in articles if matches_keywords(a, keywords)]
+    cutoff = datetime.now(timezone.utc) - timedelta(days=7)
+    recent = [a for a in articles if a["published"] is None or a["published"] >= cutoff]
+    matched = [a for a in recent if matches_keywords(a, keywords)]
     return deduplicate(matched)

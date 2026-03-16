@@ -67,18 +67,23 @@ def _render_articles(items: list[dict]) -> list[str]:
     return lines
 
 
-def format_report(articles: list[dict], date: datetime | None = None) -> str:
+def format_report(articles: list[dict], date: datetime | None = None, week_start: datetime | None = None) -> str:
     if date is None:
         date = datetime.now(timezone.utc)
-    date_str = date.strftime("%Y-%m-%d")
+    if week_start is None:
+        from datetime import timedelta
+        week_start = date - timedelta(days=7)
+
+    week_range = f"{week_start.strftime('%Y-%m-%d')} to {date.strftime('%Y-%m-%d')}"
 
     news = [a for a in articles if a.get("type", "news") == "news"]
     academic = [a for a in articles if a.get("type") == "academic"]
 
     lines = [
-        f"# Penguin News Report — {date_str}",
+        f"# Penguin News Report — Week of {week_start.strftime('%Y-%m-%d')}",
         "",
         f"> Generated on {date.strftime('%Y-%m-%d %H:%M UTC')} "
+        f"| Covering {week_range} "
         f"| {len(news)} news articles | {len(academic)} academic items",
         "",
         "---",
@@ -91,7 +96,7 @@ def format_report(articles: list[dict], date: datetime | None = None) -> str:
     if news:
         lines.extend(_render_articles(news))
     else:
-        lines.append("_No penguin-related news found today._")
+        lines.append("_No penguin-related news found this week._")
         lines.append("")
 
     lines.append("---")
@@ -104,7 +109,7 @@ def format_report(articles: list[dict], date: datetime | None = None) -> str:
         lines.extend(_render_articles(academic))
     else:
         lines.append(
-            "_No new academic papers matched today. "
+            "_No new academic papers matched this week. "
             "Here are recommended foundational studies:_"
         )
         lines.append("")
