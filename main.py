@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
 from src.collector import collect_all
-from src.filter import filter_articles
+from src.filter import filter_articles, filter_articles_older
 from src.formatter import format_report, save_report
 from src.notifier import send_report
 
@@ -29,7 +29,10 @@ def main():
     filtered = filter_articles(articles)
     logger.info(f"Articles after filtering: {len(filtered)}")
 
-    report = format_report(filtered, date=today, week_start=week_start)
+    older = filter_articles_older(articles, exclude=filtered)
+    logger.info(f"Older fallback articles available: {len(older)}")
+
+    report = format_report(filtered, older_articles=older, date=today, week_start=week_start)
     path = save_report(report, date=today)
     logger.info(f"Report saved to {path}")
 

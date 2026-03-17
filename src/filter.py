@@ -38,3 +38,19 @@ def filter_articles(articles: list[dict]) -> list[dict]:
     recent = [a for a in articles if a["published"] is None or a["published"] >= cutoff]
     matched = [a for a in recent if matches_keywords(a, keywords)]
     return deduplicate(matched)
+
+
+def filter_articles_older(articles: list[dict], exclude: list[dict]) -> list[dict]:
+    """Return keyword-matched articles older than 7 days, excluding already-selected ones."""
+    keywords = load_keywords()
+    cutoff = datetime.now(timezone.utc) - timedelta(days=7)
+    exclude_urls = {a["url"] for a in exclude}
+    older = [
+        a for a in articles
+        if a["published"] is not None and a["published"] < cutoff
+        and matches_keywords(a, keywords)
+        and a["url"] not in exclude_urls
+    ]
+    # Sort by most recent first so we pick the closest-to-now older articles
+    older.sort(key=lambda a: a["published"], reverse=True)
+    return deduplicate(older)

@@ -53,12 +53,15 @@ def _truncate(text: str, limit: int = 300) -> str:
     return text[:limit - 3] + "..." if len(text) > limit else text
 
 
-def _render_articles(items: list[dict]) -> list[str]:
+def _render_articles(items: list[dict], label: str | None = None) -> list[str]:
     lines = []
     for item in items:
         pub = item["published"].strftime("%b %d, %Y") if item["published"] else "Unknown date"
         lines.append(f"### [{item['title']}]({item['url']})")
-        lines.append(f"_{item['source']} — {pub}_")
+        source_line = f"_{item['source']} — {pub}_"
+        if label:
+            source_line += f" _{label}_"
+        lines.append(source_line)
         lines.append("")
         if item["summary"]:
             summary = _truncate(_strip_html(item["summary"]))
@@ -67,17 +70,37 @@ def _render_articles(items: list[dict]) -> list[str]:
     return lines
 
 
-def format_report(articles: list[dict], date: datetime | None = None, week_start: datetime | None = None) -> str:
+MIN_ITEMS = 3
+
+
+def _fill_to_min(current: list[dict], older: list[dict], item_type: str) -> tuple[list[dict], list[dict]]:
+    """Return (current, fill) where fill contains older items needed to reach MIN_ITEMS."""
+    needed = max(0, MIN_ITEMS - len(current))
+    candidates = [a for a in older if a.get("type", "news") == item_type]
+    return current, candidates[:needed]
+
+
+def format_report(
+    articles: list[dict],
+    older_articles: list[dict] | None = None,
+    date: datetime | None = None,
+    week_start: datetime | None = None,
+) -> str:
     if date is None:
         date = datetime.now(timezone.utc)
     if week_start is None:
         from datetime import timedelta
         week_start = date - timedelta(days=7)
+    if older_articles is None:
+        older_articles = []
 
     week_range = f"{week_start.strftime('%Y-%m-%d')} to {date.strftime('%Y-%m-%d')}"
 
     news = [a for a in articles if a.get("type", "news") == "news"]
     academic = [a for a in articles if a.get("type") == "academic"]
+
+    news, news_fill = _fill_to_min(news, older_articles, "news")
+    academic, academic_fill = _fill_to_min(academic, older_articles, "academic")
 
     lines = [
         f"# Penguin News Report — Week of {week_start.strftime('%Y-%m-%d')}",
@@ -93,8 +116,12 @@ def format_report(articles: list[dict], date: datetime | None = None, week_start
     # --- News section ---
     lines.append("## News & Media")
     lines.append("")
-    if news:
+    if news or news_fill:
         lines.extend(_render_articles(news))
+        if news_fill:
+            lines.append("_Older picks to round out this week's reading:_")
+            lines.append("")
+            lines.extend(_render_articles(news_fill, label="· older"))
     else:
         lines.append("_No penguin-related news found this week._")
         lines.append("")
@@ -105,8 +132,12 @@ def format_report(articles: list[dict], date: datetime | None = None, week_start
     # --- Academic section ---
     lines.append("## Academic Research")
     lines.append("")
-    if academic:
+    if academic or academic_fill:
         lines.extend(_render_articles(academic))
+        if academic_fill:
+            lines.append("_Older picks to round out this week's reading:_")
+            lines.append("")
+            lines.extend(_render_articles(academic_fill, label="· older"))
     else:
         lines.append(
             "_No new academic papers matched this week. "
