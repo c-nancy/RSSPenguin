@@ -121,6 +121,22 @@ feeds:
     url: https://rsshub.app/apnews/topics/science
     type: news
 
+  - name: BirdLife International
+    url: https://www.birdlife.org/feed/
+    type: news
+
+  - name: Australian Antarctic Division
+    url: http://www.antarctica.gov.au/news/rss/
+    type: news
+
+  - name: NOAA Climate — Beyond the Data
+    url: https://climate.gov/feeds/news-features/beyond-the-data.rss
+    type: news
+
+  - name: NSIDC Arctic Sea Ice News
+    url: https://nsidc.org/arcticseaicenews/feed
+    type: news
+
   # --- Academic & Research ---
   - name: British Antarctic Survey
     url: https://www.bas.ac.uk/category/science/feed/
@@ -156,4 +172,8 @@ feeds:
 
   - name: Antarctic Science (Cambridge)
     url: https://www.cambridge.org/core/journals/antarctic-science/rss
+    type: academic
+
+  - name: Journal of Avian Biology (Wiley)
+    url: http://onlinelibrary.wiley.com/rss/journal/10.1111/(ISSN)1600-048X
     type: academic
