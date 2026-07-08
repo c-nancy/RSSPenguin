@@ -33,8 +33,8 @@ def main():
     logger.info(f"Older fallback articles available: {len(older)}")
 
     report = format_report(filtered, older_articles=older, date=today, week_start=week_start)
-    path = save_report(report, date=today)
-    logger.info(f"Report saved to {path}")
+    # path = save_report(report, date=today)
+    # logger.info(f"Report saved to {path}")
 
     subject = f"Penguin News — Week of {week_start.strftime('%Y-%m-%d')}"
     send_report(subject, report)
